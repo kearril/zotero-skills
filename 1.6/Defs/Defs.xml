@@ -147,7 +147,7 @@
         <fuelConsumptionRate>75</fuelConsumptionRate>
         <fuelCapacity>150</fuelCapacity>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
-        <autoRefuelPercent>0.75</autoRefuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
         <fuelFilter>
           <thingDefs>
             <li>Meat_Megaspider</li>
