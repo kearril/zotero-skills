@@ -1,18 +1,13 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse.AI;
-using Verse;
 using UnityEngine;
+using Verse;
+using Verse.AI;
 
 namespace FishingSpotsandAnglerKits
 {
-
-
     [HarmonyPatch(typeof(WorkGiver_Fish), nameof(WorkGiver_Fish.NonScanJob))]
     public static class WorkGiver_Fish_NonScanJob_Patch
     {
@@ -227,44 +222,4 @@ namespace FishingSpotsandAnglerKits
             return best;
         }
     }
-
-
-
-
-
-    [StaticConstructorOnStartup]
-    public static class FishingSpotMod
-    {
-        static FishingSpotMod()
-        {
-            var harmony = new Harmony("FSAK.fishingspot");
-            harmony.PatchAll();
-        }
-    }
-
-    public class PlaceWorker_FishingSpot : PlaceWorker
-    {
-        public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map,
-            Thing thingToIgnore = null, Thing thing = null)
-        {
-            bool inFishingZone = loc.GetZone(map) is Zone_Fishing;
-            bool validLocation = loc.Standable(map) || loc.GetTerrain(map).IsWater;
-
-            if (inFishingZone && validLocation)
-                return AcceptanceReport.WasAccepted;
-
-            foreach (var c in GenAdj.CellsAdjacent8Way(new TargetInfo(loc, map)))
-
-            {
-                if (c.InBounds(map) && c.GetZone(map) is Zone_Fishing)
-                {
-                    if (validLocation)
-                        return AcceptanceReport.WasAccepted;
-                }
-            }
-
-            return new AcceptanceReport("FishingSpotMustBeInOrNextToFishingZone".Translate());
-        }
-    }
-
 }
