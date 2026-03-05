@@ -144,6 +144,7 @@
         </researchPrerequisites>
         <comps>
             <li Class="CompProperties_Refuelable">
+                <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
                 <fuelConsumptionRate>75</fuelConsumptionRate>
                 <fuelCapacity>150</fuelCapacity>
                 <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
@@ -213,6 +214,10 @@
         <weaponClasses>
             <li>Neolithic</li>
         </weaponClasses>
+        <equippedStatOffsets>
+            <FishingSpeed>0.1</FishingSpeed>
+        </equippedStatOffsets>
+
         <costList>
             <Gold>30</Gold>
             <Jade>50</Jade>
@@ -224,7 +229,6 @@
             <MarketValue>4000</MarketValue>
         </statBases>
         <equippedAngleOffset>-65</equippedAngleOffset>
-
         <burnableByRecipe>false</burnableByRecipe>
         <tools>
             <li>
