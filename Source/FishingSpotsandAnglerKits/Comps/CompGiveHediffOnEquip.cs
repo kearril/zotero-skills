@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
+﻿using Verse;
 
-namespace FishingSpotsandAnglerKits
+namespace FishingSpotsandAnglerKits.Comps
 {
     public class CompGiveHediffOnEquip : ThingComp
     {
         private CompProperties_GiveHediffOnEquip Props => (CompProperties_GiveHediffOnEquip)props;
 
+        //装备时给予Hediff
         public override void Notify_Equipped(Pawn pawn)
         {
             if (this.Props == null || this.Props.hediffDefs == null)
@@ -27,6 +23,7 @@ namespace FishingSpotsandAnglerKits
             }
         }
 
+        //卸下时移除Hediff
         public override void Notify_Unequipped(Pawn pawn)
         {
             if (this.Props == null || this.Props.hediffDefs == null)
@@ -47,7 +44,7 @@ namespace FishingSpotsandAnglerKits
 
     public class CompProperties_GiveHediffOnEquip : CompProperties
     {
-        public List<HediffDef> hediffDefs;
+        public List<HediffDef>? hediffDefs;
 
         public CompProperties_GiveHediffOnEquip()
         {

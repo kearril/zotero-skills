@@ -1,42 +1,40 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
-using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
-namespace FishingSpotsandAnglerKits
+namespace FishingSpotsandAnglerKits.Harmony
 {
+    //绘制额外的钓鱼特效，如果角色有SeasFavor这个Hediff
     [HarmonyPatch(typeof(JobDriver_Fish), "MakeNewToils")]
     public static class Patch_FishingEffect_Postfix
     {
-        private static readonly HediffDef SeasFavor = HediffDef.Named("SeasFavor");
-        private static readonly EffecterDef GoldenFishing = DefDatabase<EffecterDef>.GetNamed("GoldenFishing");
+        private static HediffDef? _seasFavor;
 
-        public static void Postfix(JobDriver_Fish __instance, ref IEnumerable<Toil> __result)
+        private static HediffDef SeasFavor =>
+            _seasFavor ??= DefDatabase<HediffDef>.GetNamed("SeasFavor");
+
+        private static EffecterDef? _goldenFishing;
+
+        private static EffecterDef GoldenFishing =>
+            _goldenFishing ??= DefDatabase<EffecterDef>.GetNamed("GoldenFishing");
+
+        public static IEnumerable<Toil> Postfix(IEnumerable<Toil> __result, JobDriver_Fish __instance)
         {
-            var toils = new List<Toil>(__result);
-
-            foreach (var toil in toils)
+            foreach (Toil toil in __result)
             {
-                // WaitWith toil 的特征：tickAction 不为空
-                if (toil.tickAction != null)
+                if (toil.tickAction != null && __instance.pawn.health.hediffSet.HasHediff(SeasFavor))
                 {
-                    if (__instance.pawn.health.hediffSet.HasHediff(SeasFavor))
-                    {
-                        // 模拟多杆钓鱼的效果（其实只是叠加个特效）
-                        toil.WithEffect(
-                            GoldenFishing,
-                            () => __instance.job.GetTarget(TargetIndex.A),
-                            null
-                        );
-                    }
-
-             
-                    break;
+                    yield return toil.WithEffect(
+                        GoldenFishing,
+                        TargetIndex.A
+                    );
+                }
+                else
+                {
+                    yield return toil;
                 }
             }
-
-            __result = toils;
         }
     }
 }

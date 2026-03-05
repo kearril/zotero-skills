@@ -8,7 +8,7 @@ namespace FishingSpotsandAnglerKits
     {
         static FishingSpotMod()
         {
-            var harmony = new Harmony("FSAK.fishingspot");
+            var harmony = new HarmonyLib.Harmony("FSAK.fishingspot");
             harmony.PatchAll();
         }
     }
