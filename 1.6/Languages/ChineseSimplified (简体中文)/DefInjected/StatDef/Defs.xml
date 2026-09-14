@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<LanguageData>
-  
-  <!-- EN: Fishing Rare Multiplier -->
-  <FishingRareMultiplier.label>钓鱼稀有乘数</FishingRareMultiplier.label>
-  <!-- EN: The original rare probability is 1%, this multiplier is used to increase the rare probability. The final settlement probability is 1%*this value -->
-  <FishingRareMultiplier.description>原始稀有概率为1%，此乘数用于增加稀有概率。最终结算概率为1%*此值</FishingRareMultiplier.description>
-  
-</LanguageData>
