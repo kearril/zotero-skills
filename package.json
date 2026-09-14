@@ -1,0 +1,14 @@
+{
+  "name": "zotero-skills",
+  "version": "1.0.0",
+  "description": "Zotero Desktop Local API skills for AI coding agents",
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "zotero",
+    "research",
+    "literature",
+    "citation"
+  ],
+  "license": "MIT"
+}
